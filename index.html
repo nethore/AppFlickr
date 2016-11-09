@@ -14,11 +14,47 @@
 
   </head>
   <body>
+  <nav>
+    <div class="nav-wrapper">
+      <a data-activates="slide-out" href="#" class="brand-logo affiche-sidebar"><i class="fa fa-flickr" aria-hidden="true"></i> FlickrIfy</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#" id="btn-javascript" name="javascript">javascript</a></li>
+        <li><a href="#" id="btn-php" name="php">php</a></li>
+        <li><a href="#" id="btn-angular" name="angular">angularjs</a></li>
+        <li><a href="#" id="btn-html" name="html">html</a></li>
+        <li><a href="#" id="btn-css" name="css">css</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    
+  <!-- Side nav  -->
+  <div id="slide-out" class="side-nav">
+    <div>
+      <h4>FlickrIfy</h4>
+      <p>FlickrIfy vous permet de récuperer un ensemble d'images depuis Flickr à partir d'un tag.</p>
+    </div>
+    <form>
+      <div class="input-field">
+        <input id="tags" type="text" class="validate">
+        <label for="tags">Ajouter un tag</label>
+      </div>
+      <div>
+        <button class="btn waves-effect waves-light" type="button" id="add-tag">Ajouter
+          <i class="material-icons right">library_add</i>
+        </button>
+      </div>
+      <div id="chips-tags">
+      </div>
+  </form>
+</div>
+  <!-- Fin side nav -->
+
+    <div class="grid"></div>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/materialize/dist/js/materialize.min.js"></script>
+    <script src="bower_components/masonry/dist/masonry.pkgd.min.js" charset="utf-8"></script>
+    <script src="bower_components/imagesloaded/imagesloaded.pkgd.min.js" charset="utf-8"></script>
     <script src="dist/js/app.min.js" charset="utf-8"></script>
   </body>
 </html>
