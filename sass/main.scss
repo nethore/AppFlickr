@@ -55,7 +55,7 @@ body {
       margin-left: 1rem;
     }
   }
-  .grid {  margin: 20px auto 0 auto; }
+  .grid {  margin: 10px auto 0 auto; }
   .grid-item { width: 300px; }
 
   .side-nav {
@@ -64,10 +64,51 @@ body {
     .input-field {
       margin: 25px 0 0 0;
     }
+    h4 {
+      margin-top: 0px;
+    }
   }
 
   #chips-tags {
     margin-top: 25px;
   }
-
+  .card-reveal {
+    span {
+      font-style: italic;
+      font-size: 0.8rem;
+    }
+  }
+  .tags {
+    margin: 0;
+  }
+  .chips {
+    border-bottom: none;
+  }
+  .chips .input {
+    display: none;
+  }
+  .range-holder {
+    margin-top: 35px;
+    margin-bottom: 25px;
+    .img-counter {
+      font-weight: bold;
+      color: white;
+      padding: 3px 10px;
+      background-color: $secondary-color;
+      border-radius: 25px;
+      margin-left: 10px;
+    }
+    input {
+      margin-top:15px;
+      width:80%;
+    }
+  }
+  .loader-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  #mobile-demo {
+    p { margin: 0; }
+  }
 }

@@ -41,7 +41,7 @@ gulp.task('js', function() {
     .pipe(concat('app.min.js'))
     .pipe(uglify()) //minify js
     .pipe(gulp.dest('dist/js'))
-    .pipe(notify("Préparation JS Ok"))
+    // .pipe(notify("Préparation JS Ok"))
     .pipe(reload({stream:true, once: true}));
 });
 
@@ -70,7 +70,7 @@ gulp.task('sass', function(){
     cascade: false
   }))
   // .pipe(uncss({ html: ['index.html'], ignore: ['.cards-container', '.grid-item'] }))
-  .pipe(minifyCss())
+  // .pipe(minifyCss())
   .pipe(sourcemaps.write('.'))
   .pipe(gulp.dest('dist/css/'))
   // .pipe(notify("Préparation SASS Ok"))

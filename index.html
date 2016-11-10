@@ -14,18 +14,18 @@
 
   </head>
   <body>
-  <nav>
-    <div class="nav-wrapper">
-      <a data-activates="slide-out" href="#" class="brand-logo affiche-sidebar"><i class="fa fa-flickr" aria-hidden="true"></i> FlickrIfy</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#" id="btn-javascript" name="javascript">javascript</a></li>
-        <li><a href="#" id="btn-php" name="php">php</a></li>
-        <li><a href="#" id="btn-angular" name="angular">angularjs</a></li>
-        <li><a href="#" id="btn-html" name="html">html</a></li>
-        <li><a href="#" id="btn-css" name="css">css</a></li>
-      </ul>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <a data-activates="slide-out" href="#" class="left brand-logo affiche-sidebar"><i class="fa fa-flickr" aria-hidden="true"></i> FlickrIfy </a>
+          <a href="#" data-activates="mobile-demo" class="right button-collapse"><i class="material-icons">menu</i></a>
+          <ul id="nav-mobile" class="selecteur right hide-on-med-and-down">
+          </ul>
+          <ul id="mobile-demo" class="selecteur side-nav">
+          </ul>
+        </div>
+      </nav>
     </div>
-  </nav>
 
   <!-- Side nav  -->
   <div id="slide-out" class="side-nav">
@@ -33,21 +33,45 @@
       <h4>FlickrIfy</h4>
       <p>FlickrIfy vous permet de récuperer un ensemble d'images depuis Flickr à partir d'un tag.</p>
     </div>
+    <div>
+      <div class="chip-holder">
+      </div>
+    </div>
     <form>
       <div class="input-field">
         <input id="tags" type="text" class="validate">
-        <label for="tags">Ajouter un tag</label>
+        <label for="tags">Ajouter un ou plusieurs tags</label>
       </div>
       <div>
         <button class="btn waves-effect waves-light" type="button" id="add-tag">Ajouter
           <i class="material-icons right">library_add</i>
         </button>
       </div>
-      <div id="chips-tags">
+      <div class="range-holder">
+        <p>Combien d'images voulez vous afficher ?</p>
+        <form action="#">
+          <p class="range-field">
+            <input type="range" id="range-image" min="1" max="20" value="20" /><span class="img-counter">20</span>
+          </p>
+        </form>
       </div>
   </form>
 </div>
   <!-- Fin side nav -->
+
+  <div class="loader-div">
+    <div class="preloader-wrapper active" id="loading">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <div class="grid"></div>
 
