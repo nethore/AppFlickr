@@ -3,8 +3,7 @@ $(document).ready(function() {
   // On initialise la side nav
   $(".affiche-sidebar").sideNav();
   $(".button-collapse").sideNav({
-    edge: 'right', // Choose the horizontal origin
-    closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    edge: 'right' // Choose the horizontal origin
   });
 
 
@@ -32,6 +31,10 @@ $(document).ready(function() {
   initMasonryWithLastItem(tagArray);
 
   // Fonctions
+
+  function loader() {
+      $('.loader-div').show();
+  }
 
   function initMasonryWithLastItem(array) {
     array = array.reverse();
@@ -86,23 +89,33 @@ $(document).ready(function() {
 
 			photoHTML += '<div class="grid-item"><div class="card light-blue darken-3">';
 			photoHTML += '<div class="card-image waves-effect waves-block waves-light"><img class="activator" src="' + photo.media.m + '"></div>';
-      photoHTML += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">Tags<i class="material-icons right">close</i></span><p class="tags"><span>' + photo.tags + '</span></p><p><a class="waves-effect waves-light btn" href="' + photo.link + '" target="_blank">Ouvrir sur Flickr</a></p></div>';
+      photoHTML += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">Tags<i class="material-icons right">close</i></span><p class="tags"><span>' + photo.tags + '</span></p><p><a class="waves-effect waves-light btn" href="' + photo.link + '" target="_blank">Ouvrir  sur Flickr</a></p></div>';
       photoHTML += '</div></div>';
 
 		});
 
     // On push l'html et on reinitialise masonry
+    $('.loader-div').show();
 		$('.grid').html(photoHTML)
     .masonry('remove', $('.grid').find('grid-item'))
     .masonry('destroy')
-    .imagesLoaded(function(){
-      $('.grid').masonry({
-        itemSelector: '.grid-item',
-        gutter: 10,
-        fitWidth: true,
-        columnWidth: 300
-      });
-    });
+    .css('visibility', 'hidden')
+    .imagesLoaded(
+      function(){
+        $('.grid').masonry({
+          itemSelector: '.grid-item',
+          gutter: 20,
+          fitWidth: true,
+          columnWidth: 300
+        })
+        .css('visibility', 'visible');
+      }
+    ).done(
+      function(){
+        $('.loader-div').hide();
+      }
+    );
+
 	}
 
   // Retrieve Ajax datas
@@ -144,11 +157,37 @@ $(document).ready(function() {
 
       boucleInitTags(tagArray);
       initMasonryWithLastItem(tagArray);
+      Materialize.toast('Tag(s) ajouté(s)', 2000);
 
       // JE vide le champ
       $(this).parents('form').find('input#tags').val('');
     }
 
+  });
+
+  // Taper entrée
+  $('input#tags').bind('keypress', function(e) {
+    if(e.keyCode==13){
+      var monTag = $(this).val().toLowerCase();
+      // Si il n'est pas vide
+      if (monTag !== "") {
+
+        var monTagDecoupe = monTag.match(regexTag);
+
+        // J'ajoute mon tag au tableau
+        tagArray = tagArray.concat(monTagDecoupe);
+
+        // Je stocke mon array
+        sessionStorage.setItem("tags", JSON.stringify(tagArray));
+
+        boucleInitTags(tagArray);
+        initMasonryWithLastItem(tagArray);
+        Materialize.toast('Tag(s) ajouté(s)', 2000);
+
+        // JE vide le champ
+        $(this).val('');
+      }
+    }
   });
 
   // Gere la suppression des chips

@@ -50,13 +50,32 @@ body {
     @extend .light-blue, .lighten-5;
 
   }
+  .nav-wrapper {
+    a.brand-logo {
+      font-family: 'Istok Web', sans-serif;
+      font-weight: bold;
+      span {
+        color: $secondary-color;
+      }
+    }
+  }
   nav {
     .brand-logo {
       margin-left: 1rem;
     }
   }
   .grid {  margin: 10px auto 0 auto; }
-  .grid-item { width: 300px; }
+  .grid-item {
+    width: 300px;
+  }
+  // .grid-item img {
+  //   transition: all 0.4s ease-in-out;
+  //   transform: scale(1);
+  // }
+  // .grid-item:hover img{
+  //   transform: scale(1.05);
+  //
+  // }
 
   .side-nav {
     @extend .pink-text, .text-lighten-1;

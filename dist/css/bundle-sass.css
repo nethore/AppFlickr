@@ -5726,6 +5726,12 @@ input[type=range]:focus::-ms-fill-upper {
     -moz-column-count: 3;
     column-count: 3; } }
 
+body .nav-wrapper a.brand-logo {
+  font-family: 'Istok Web', sans-serif;
+  font-weight: bold; }
+  body .nav-wrapper a.brand-logo span {
+    color: #ec407a; }
+
 body nav .brand-logo {
   margin-left: 1rem; }
 

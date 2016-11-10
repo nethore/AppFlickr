@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web:700" rel="stylesheet">
+
     <!-- Mon css sass -->
     <link rel="stylesheet" href="dist/css/bundle-sass.css" media="screen" charset="utf-8">
 
@@ -17,16 +19,18 @@
     <div class="navbar-fixed">
       <nav>
         <div class="nav-wrapper">
-          <a data-activates="slide-out" href="#" class="left brand-logo affiche-sidebar"><i class="fa fa-flickr" aria-hidden="true"></i> FlickrIfy </a>
+          <a data-activates="slide-out" href="#" class="left brand-logo affiche-sidebar tooltipped" data-position="right" data-delay="50" data-tooltip="Cliquez ici pour acceder aux options"><i class="fa fa-flickr" aria-hidden="true"></i> Flickr<span>Ify</span> </a>
           <a href="#" data-activates="mobile-demo" class="right button-collapse"><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="selecteur right hide-on-med-and-down">
           </ul>
-          <ul id="mobile-demo" class="selecteur side-nav">
-          </ul>
+
         </div>
       </nav>
     </div>
-
+  <div>
+    <ul id="mobile-demo" class="selecteur side-nav">
+    </ul>
+  </div>
   <!-- Side nav  -->
   <div id="slide-out" class="side-nav">
     <div>
@@ -47,6 +51,7 @@
           <i class="material-icons right">library_add</i>
         </button>
       </div>
+    </form>
       <div class="range-holder">
         <p>Combien d'images voulez vous afficher ?</p>
         <form action="#">
@@ -55,7 +60,6 @@
           </p>
         </form>
       </div>
-  </form>
 </div>
   <!-- Fin side nav -->
 
