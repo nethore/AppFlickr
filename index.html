@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Application Flickr</title>
 
     <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
@@ -29,6 +32,7 @@
     </div>
   <div>
     <ul id="mobile-demo" class="selecteur side-nav">
+      <p>Veuillez sélectionner un tag à afficher :</p>
     </ul>
   </div>
   <!-- Side nav  -->
@@ -41,7 +45,7 @@
       <div class="chip-holder">
       </div>
     </div>
-    <form>
+
       <div class="input-field">
         <input id="tags" type="text" class="validate">
         <label for="tags">Ajouter un ou plusieurs tags</label>
@@ -51,7 +55,6 @@
           <i class="material-icons right">library_add</i>
         </button>
       </div>
-    </form>
       <div class="range-holder">
         <p>Combien d'images voulez vous afficher ?</p>
         <form action="#">

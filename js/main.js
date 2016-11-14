@@ -6,7 +6,15 @@ $(document).ready(function() {
     edge: 'right' // Choose the horizontal origin
   });
 
+  // On initialise Masonry
+  $('.grid').masonry({
+    itemSelector: '.grid-item',
+    gutter: 20,
+    fitWidth: true,
+    columnWidth: 300
+  });
 
+  // Mes variables
   var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
   var nombreImg = 20;
 
@@ -22,11 +30,14 @@ $(document).ready(function() {
     console.log("SS", tagArray);
   }
 
+  currentTag = tagArray[tagArray.length-1];
+
   var regexTag = /[^\, ]+/ig;
 
   // On initie les menu et les tags en fonction du tableau
   boucleInitTags(tagArray);
 
+  console.log("First Array", tagArray);
   // On lance le premier retrieveDatas
   initMasonryWithLastItem(tagArray);
 
@@ -37,23 +48,47 @@ $(document).ready(function() {
   }
 
   function initMasonryWithLastItem(array) {
-    array = array.reverse();
     var currentTag = array[array.length-1];
+    console.log(currentTag);
     retrieveDatas(flickrAPI, currentTag);
+    $('.selecteur li a').parent().removeClass('active');
     $('.selecteur li a[name=' + currentTag + ']').parent().addClass('active');
   }
 
   // Initialise la liste des menus et des chips
 
-  function boucleInitTags(array) {
+  function removeTag(tag) {
+    $('div.chip-holder div.chip[name="' + tag + '"]').remove();
+    $('ul#nav-mobile li a[name="' + tag + '"]').parent().remove();
+    $('ul#mobile-demo li a[name="' + tag + '"]').parent().remove();
+  }
 
-    array = array.reverse();
+  function addTag(array) {
+    var tagAjoute = "";
+    var tagAjoute2 = "";
+    var chipAjoute = "";
+
+    // On initialise les boutons et tags en fonction du tableau
+    for (var i = 0; i < array.length; i++) {
+      tagAjoute += '<li><a href="#" name="' + array[i] + '">' + array[i] + '</a></li>';
+      console.log(tagAjoute);
+      tagAjoute2 += '<li><a href="#" name="' + array[i] + '">' + array[i] + '</a></li>';
+      // Reste a ajoiter les chips
+      chipAjoute += '<div class="chip" name="' + array[i] + '">' + array[i] + '<i class="close-chip material-icons">close</i></div>';
+    }
+
+    // On push l'HTML
+    $('div.chip-holder').append(chipAjoute);
+    $('ul#nav-mobile').append(tagAjoute);
+    $('ul#mobile-demo').append(tagAjoute2);
+  }
+
+  function boucleInitTags(array) {
 
     // on vide tout
     $('ul#nav-mobile li').remove();
     $('ul#mobile-demo li').remove();
     $('div.chip-holder div.chip').remove();
-    $('ul#mobile-demo p').remove();
 
 
     // On itinitalise tout l'html
@@ -71,10 +106,9 @@ $(document).ready(function() {
     }
 
     // On push l'HTML
-    $('div.chip-holder').prepend(chipAjoute);
-    $('ul#nav-mobile').prepend(tagAjoute);
-    $('ul#mobile-demo').prepend(tagAjoute2);
-    $('ul#mobile-demo').prepend('<p>Veuillez sélectionner un tag à afficher :</p>');
+    $('div.chip-holder').append(chipAjoute);
+    $('ul#nav-mobile').append(tagAjoute);
+    $('ul#mobile-demo').append(tagAjoute2);
   }
 
   // Affiche mes photos
@@ -82,7 +116,6 @@ $(document).ready(function() {
 		var photoHTML = '';
 
 		$.each( data.items, function(i, photo){
-
       if (i == nombreImg) {
         return false;
       }
@@ -97,17 +130,11 @@ $(document).ready(function() {
     // On push l'html et on reinitialise masonry
     $('.loader-div').show();
 		$('.grid').html(photoHTML)
-    .masonry('remove', $('.grid').find('grid-item'))
-    .masonry('destroy')
     .css('visibility', 'hidden')
+    .masonry('reloadItems')
     .imagesLoaded(
       function(){
-        $('.grid').masonry({
-          itemSelector: '.grid-item',
-          gutter: 20,
-          fitWidth: true,
-          columnWidth: 300
-        })
+        $('.grid').masonry()
         .css('visibility', 'visible');
       }
     ).done(
@@ -143,19 +170,23 @@ $(document).ready(function() {
   // Au clic sur le bouton add
   $('button#add-tag').click(function(){
 
-    var monTag = $(this).parents('form').find('input#tags').val().toLowerCase();
+    var monTag = $(this).parents('#slide-out').find('input#tags').val().toLowerCase();
     // Si il n'est pas vide
     if (monTag !== "") {
 
       var monTagDecoupe = monTag.match(regexTag);
 
+      console.log(tagArray);
+
       // J'ajoute mon tag au tableau
       tagArray = tagArray.concat(monTagDecoupe);
+
+      console.log(tagArray);
 
       // Je stocke mon array
       sessionStorage.setItem("tags", JSON.stringify(tagArray));
 
-      boucleInitTags(tagArray);
+      addTag(monTagDecoupe);
       initMasonryWithLastItem(tagArray);
       Materialize.toast('Tag(s) ajouté(s)', 2000);
 
@@ -180,7 +211,7 @@ $(document).ready(function() {
         // Je stocke mon array
         sessionStorage.setItem("tags", JSON.stringify(tagArray));
 
-        boucleInitTags(tagArray);
+        addTag(monTagDecoupe);
         initMasonryWithLastItem(tagArray);
         Materialize.toast('Tag(s) ajouté(s)', 2000);
 
@@ -199,7 +230,9 @@ $(document).ready(function() {
     }
     // Je stock mon array
     sessionStorage.setItem("tags", JSON.stringify(tagArray));
-    boucleInitTags(tagArray);
+    console.log(tagArray);
+    removeTag(tagName);
+    // boucleInitTags(tagArray);
     initMasonryWithLastItem(tagArray);
 
   });

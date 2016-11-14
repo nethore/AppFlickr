@@ -17,6 +17,7 @@
   "dependencies": {
     "materialize": "^0.97.8",
     "masonry": "^4.1.1",
-    "imagesloaded": "^4.1.1"
+    "imagesloaded": "^4.1.1",
+    "aos": "^2.1.1"
   }
 }
