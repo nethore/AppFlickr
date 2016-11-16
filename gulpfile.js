@@ -18,7 +18,7 @@ var reload      = browserSync.reload;
 gulp.task('browser-sync', function() {
     browserSync({
         port: 3000,
-        browser: "google chrome",
+        // browser: "google chrome",
         server: {
             baseDir: "./", //base directory
             index: "index.html" //fichier a lancer par defaut
